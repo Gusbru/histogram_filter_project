@@ -20,8 +20,6 @@
 using namespace std;
 
 /**
-	TODO - implement this function
-
     Normalizes a grid of numbers. 
 
     @param grid - a two dimensional grid (vector of vectors of floats)
@@ -35,7 +33,22 @@ vector< vector<float> > normalize(vector< vector <float> > grid) {
 	
 	vector< vector<float> > newGrid;
 
-	// todo - your code here
+    float normFactor = 0.0;
+    for (int i = 0; i < grid.size(); ++i) {
+        for (int j = 0; j < grid[0].size(); ++j) {
+            normFactor += grid[i][j];
+        }
+    }
+
+    vector<float> row;
+    for (int i = 0; i < grid.size(); ++i) {
+        row.clear();
+        for (int j = 0; j < grid[0].size(); ++j) {
+            row.push_back(grid[i][j] / normFactor);
+        }
+        newGrid.push_back(row);
+    }
+
 
 	return newGrid;
 }
@@ -75,9 +88,26 @@ vector< vector<float> > normalize(vector< vector <float> > grid) {
 */
 vector < vector <float> > blur(vector < vector < float> > grid, float blurring) {
 
-	vector < vector <float> > newGrid;
+	vector < vector <float> > newGrid (grid.size(), vector<float> (grid[0].size(), 0.0));
 	
 	// your code here
+    vector<float> row;
+    for (int i = 0; i < grid.size(); ++i) {
+        for (int j = 0; j < grid[0].size(); ++j) {
+            newGrid[i][j] = grid[i][j] * (1.0 - blurring);
+
+            float weight = grid[i][j] * blurring / 12.0;
+            newGrid[(i-1) % grid.size()][j] = weight * 2.0;
+            newGrid[(i+1) % grid.size()][j] = weight * 2.0;
+            newGrid[i][(j-1) % grid[0].size()] = weight * 2.0;
+            newGrid[i][(j+1) % grid[0].size()] = weight * 2.0;
+
+            newGrid[(i-1) % grid.size()][(j-1) % grid[0].size()] = weight;
+            newGrid[(i+1) % grid.size()][(j-1) % grid[0].size()] = weight;
+            newGrid[(i-1) % grid.size()][(j+1) % grid[0].size()] = weight;
+            newGrid[(i+1) % grid.size()][(j+1) % grid[0].size()] = weight;
+        }
+    }
 
 	return normalize(newGrid);
 }
