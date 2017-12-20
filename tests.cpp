@@ -247,6 +247,7 @@ bool test_localizer() {
 	bool correct = true;
 	bool question_correct;
 
+
 	question_correct = test_initialize();
 	if (!question_correct) {
 		correct = false;
@@ -258,12 +259,14 @@ bool test_localizer() {
 
 	cout << endl;
 
+
 	question_correct = test_move();
 	if (!question_correct) {
 		correct = false;
 	}
 
 	cout << endl;
+
 
 	question_correct = test_sense();
 	if (!question_correct) {

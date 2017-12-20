@@ -45,8 +45,6 @@ vector< vector <float> > initialize_beliefs(vector< vector <char> > grid) {
 }
 
 /**
-	TODO - implement this function 
-    
     Implements robot sensing by updating beliefs based on the 
     color of a sensor measurement 
 
@@ -90,6 +88,18 @@ vector< vector <float> > sense(char color,
 	vector< vector <float> > newGrid;
 
 	// your code here
+    int hit;
+    vector<float> q;
+
+    for (int i = 0; i < grid.size(); ++i) {
+        q.clear();
+        for (int j = 0; j < grid[0].size(); ++j) {
+            hit = (color == grid[i][j]);
+            q.push_back(beliefs[i][j] * ((hit * p_hit) + (1-hit)*p_miss));
+        }
+
+        newGrid.push_back(q);
+    }
 
 	return normalize(newGrid);
 }
