@@ -87,7 +87,6 @@ vector< vector <float> > sense(char color,
 {
 	vector< vector <float> > newGrid;
 
-	// your code here
     int hit;
     vector<float> q;
 
@@ -106,8 +105,6 @@ vector< vector <float> > sense(char color,
 
 
 /**
-	TODO - implement this function 
-    
     Implements robot motion by updating beliefs based on the 
     intended dx and dy of the robot. 
 
@@ -147,9 +144,19 @@ vector< vector <float> > move(int dy, int dx,
 	float blurring) 
 {
 
-	vector < vector <float> > newGrid;
-
 	// your code here
+    int height = beliefs.size();
+    int width = beliefs[0].size();
+
+    vector < vector <float> > newGrid (width, vector<float>(height, 0.0));
+
+    for (int i = 0; i < beliefs.size(); ++i) {
+        for (int j = 0; j < beliefs[0].size(); ++j) {
+            int new_i = (i + dy) % height;
+            int new_j = (j + dx) % width;
+            newGrid[new_i][new_j] = beliefs[i][j];
+         }
+    }
 
 	return blur(newGrid, blurring);
 }
