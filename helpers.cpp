@@ -15,7 +15,7 @@
 #include <cmath>
 #include <string>
 #include <fstream> 
-// #include "debugging_helpers.cpp"
+//#include "debugging_helpers.cpp"
 
 using namespace std;
 
@@ -54,8 +54,6 @@ vector< vector<float> > normalize(vector< vector <float> > grid) {
 }
 
 /**
-	TODO - implement this function.
-
     Blurs (and normalizes) a grid of probabilities by spreading 
     probability from each cell over a 3x3 "window" of cells. This 
     function assumes a cyclic world where probability "spills 

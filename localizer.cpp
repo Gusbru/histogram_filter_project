@@ -18,8 +18,6 @@
 using namespace std;
 
 /**
-	TODO - implement this function 
-    
     Initializes a grid of beliefs to a uniform distribution. 
 
     @param grid - a two dimensional grid map (vector of vectors 
@@ -39,10 +37,10 @@ using namespace std;
            0.25 0.25
 */
 vector< vector <float> > initialize_beliefs(vector< vector <char> > grid) {
-	vector< vector <float> > newGrid;
 
-	// your code here
-	
+    float initialBelief = 1.0 / (float)(grid.size() * grid[0].size());
+	vector< vector <float> > newGrid (grid.size(), vector<float> (grid[0].size(), initialBelief));
+
 	return newGrid;
 }
 
